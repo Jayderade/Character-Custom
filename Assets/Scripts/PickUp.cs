@@ -16,6 +16,10 @@ public class PickUp : MonoBehaviour {
     #region Start
     private void Start()
     {
+        //Set the cursor to locked
+        Cursor.lockState = CursorLockMode.Locked;
+        //Set the Cursor to invisible
+        Cursor.visible = false;
         //connect our player to the player variable via tag
         player = GameObject.FindGameObjectWithTag("Player");
         //connect our Camera to the mainCam variable via tag
@@ -43,6 +47,24 @@ public class PickUp : MonoBehaviour {
                 {
                     //Debug that we hit a NPC
                     Debug.Log("Hit the NPC");
+                    //grab the dialougue script off the NPC that we hit
+                    Dialogue dlg = hitInfo.transform.GetComponent<Dialogue>();
+                    //if that dialogue script exists on the NPC
+                    if(dlg != null)
+                    {
+                        //turn the dialogue on and display it
+                        dlg.showDlg = true;
+                        //get the players mouselook script and turn it off
+                        player.GetComponent<MouseLook>().enabled = true;
+                        //get the players movement script and turn it off
+                        player.GetComponent<Movement>().enabled = true;
+                        //turn the camera's mouselook off
+                        mainCam.GetComponent<MouseLook>().enabled = true;
+                        //allow the cursor to move on screen
+                        Cursor.lockState = CursorLockMode.None;
+                        //and allow the cursor to be visible on screen
+                        Cursor.visible = true;
+                    }
                 }
                 #endregion
                 #region Item
