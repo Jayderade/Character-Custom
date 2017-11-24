@@ -119,9 +119,11 @@ public class Inventory : MonoBehaviour
             //turn back on char and cam movement/mouselock
             gameObject.GetComponent<Movement>().enabled = false;
             gameObject.GetComponent<MouseLook>().enabled = true;
+            mainCam.enabled = true;
             //lock and hide our cursor
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
             return (false);
         }
         else
@@ -131,6 +133,7 @@ public class Inventory : MonoBehaviour
             //turn back on char and cam movement/mouselock
             gameObject.GetComponent<Movement>().enabled = true;
             gameObject.GetComponent<MouseLook>().enabled = false;
+            mainCam.enabled = false;
             //lock and hide our cursor
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
